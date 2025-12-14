@@ -1,34 +1,30 @@
 import time
-from typing import Callable, Dict, List, Any
+from typing import Callable, Dict
 
 
 def time_once(func: Callable, *args, **kwargs) -> float:
     """
-    Измеряет время выполнения функции один раз.
-
+    Измеряет время выполнения функции один раз
     Args:
-        func (Callable): Функция для тестирования
-        *args: Аргументы функции
-        **kwargs: Именованные аргументы функции
-
+        func (Callable): функция для тестирования
+        *args: аргументы функции
+        **kwargs: именованные аргументы функции
     Returns:
-        float: Время выполнения в секундах
+        float: время выполнения в секундах
     """
-    start_time = time.perf_cer()
+    start = time.perf_cer()
     func(*args, **kwargs)
-    end_time = time.perf_cer()
-    return end_time - start_time
+    end = time.perf_cer()
+    return end - start
 
 
-def benchmark_sorts(aays: Dict[str, List],
+def benchmark_sorts(arrays: Dict[str, list],
                     algorithms: Dict[str, Callable]) -> Dict[str, Dict[str, float]]:
     """
-    Запускает бенчмарк для сортировок на разных массивах.
-
+    Запускает бенчмарк для сортировок на разных массивах
     Args:
-        aays (Dict): Словарь с тестовыми массивами {имя: массив}
+        arrays (Dict): Словарь с тестовыми массивами {имя: массив}
         algorithms (Dict): Словарь с алгоритмами сортировки {имя: функция}
-
     Returns:
         Dict: Результаты бенчмарка {алгоритм: {массив: время}}
     """
@@ -37,12 +33,10 @@ def benchmark_sorts(aays: Dict[str, List],
     for algo_name, algo_func in algorithms.items():
         results[algo_name] = {}
 
-        for aay_name, aay in aays.items():
+        for aay_name, aay in arrays.items():
             # Копируем массив для каждого теста
             a_copy = aay.copy()
-
-            # Измеряем время
-            time_taken = time_once(algo_func, a_copy)
-            results[algo_name][aay_name] = time_taken
-
+            # Мерим время
+            time = time_once(algo_func, a_copy)
+            results[algo_name][aay_name] = time
     return results

@@ -10,7 +10,7 @@ from src.algorithms.factorial import factorial, factorial_recursive
 from src.algorithms.fibonacci import fibo, fibo_recursive
 from src.sort.bubble_sort import bubble_sort
 from src.sort.quick_sort import quick_sort
-from src.sort.counting_sort import cing_sort
+from src.sort.cing_sort import cing_sort
 from src.sort.radix_sort import radix_sort
 from src.sort.bucket_sort import bucket_sort
 from src.sort.heap_sort import heap_sort
